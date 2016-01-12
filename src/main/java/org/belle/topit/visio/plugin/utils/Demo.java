@@ -1,12 +1,14 @@
 package org.belle.topit.visio.plugin.utils;
+
 import org.belle.topit.visio.base.IVDocument;
 import org.belle.topit.visio.base.IVMaster;
 import org.belle.topit.visio.base.IVShape;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Demo {
 
-	private static org.slf4j.Logger log = LoggerFactory.getLogger(Demo.class);
+	private static Logger log = LoggerFactory.getLogger(Demo.class);
 
 	public static void main(String[] args) {
 
@@ -52,13 +54,8 @@ public class Demo {
 			IVShape gfqShape3 = visio.drop(template, gfq3, 2, 3, true);
 			IVShape gfqShape4 = visio.drop(template, gfq4, 2, 3, true);
 			IVShape gfqShape5 = visio.drop(template, gfq6, 2, 3, true);
-			IVShape gfqShape6 = visio.drop(template, gfq5, 2, 3, true);
-			IVShape gfqShape7 = visio.drop(template, gfq7, 2, 3, true);
-			IVShape gfqShape8 = visio.drop(template, gfq8, 2, 3, true);
-			IVShape gfqShape9 = visio.drop(template, gfq9, 2, 3, true);
 
 			IVMaster line = visio.getMaster(model, "动态连接线");
-
 			IVMaster line5 = visio.getMaster(model, "动态连接线");
 			IVMaster line6 = visio.getMaster(model, "动态连接线");
 			IVMaster line7 = visio.getMaster(model, "动态连接线");

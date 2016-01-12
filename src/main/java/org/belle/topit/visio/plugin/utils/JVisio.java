@@ -20,27 +20,24 @@ public class JVisio {
 	IVApplication visioApp = null;
 
 	/**
-	 * 
 	 * 默认visio可见
-	 * 
 	 */
 	public JVisio() {
-		this(true);
+		this(false);
 	}
 
 	/**
-	 * 
 	 * @param visible
 	 */
 	public JVisio(boolean visible) {
 		this.visioApp = ClassFactory.createApplication();
 		this.visioApp.visible(visible);
+		visioApp.commandBars();
 
 	}
 
 	/**
 	 * 退出
-	 * 
 	 */
 	public void quit() {
 		this.visioApp.quit();
@@ -75,7 +72,6 @@ public class JVisio {
 	public short saveAs(IVDocument document, String distFile) {
 		IVPage tpage = document.pages().item(new Integer(1));
 		tpage.autoSizeDrawing();
-
 		return document.saveAs("Y:\\work.vsd");
 	}
 
@@ -89,23 +85,15 @@ public class JVisio {
 	 * @return
 	 */
 	public IVMaster getMaster(IVDocument document, String masterNameUIDOrIndex) {
-		IVMasters masters = document.pages().item(new Integer(1)).document()
-				.masters();
+		IVMasters masters = document.pages().item(new Integer(1)).document().masters();
 		IVMaster master = masters.item(masterNameUIDOrIndex);
 		log.info("Get the master :" + (master == null ? null : master.name()));
 		return master;
 	}
 
 	/**
-	 * 获取单元格
-	 * 
-	 * 
-	 * 
-	 * for example :
-	 * 
-	 * 
-	 * 
-	 * double pageWidth = getCells(bts,"PageWidth").getResultIU();
+	 * 获取单元格 for example : double pageWidth =
+	 * getCells(bts,"PageWidth").getResultIU();
 	 * 
 	 * @param master
 	 * @param localeSpecificCellName

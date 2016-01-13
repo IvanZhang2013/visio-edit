@@ -1,10 +1,12 @@
 package org.belle.topit.visio.plugin.orgmodel;
 
-public abstract class DocumentConfig {
+public  class DocumentConfig {
 
-	private String xPatch;
+	protected String xPatch;
 
-	private Node<?> node;
+	protected Tree tree;
+
+	protected String rootCode;
 
 	public String getxPatch() {
 		return xPatch;
@@ -14,12 +16,20 @@ public abstract class DocumentConfig {
 		this.xPatch = xPatch;
 	}
 
-	public Node<?> getNode() {
-		return node;
+	public String getRootCode() {
+		return rootCode;
 	}
 
-	public void setNode(Node<?> node) {
-		this.node = node;
+	public void setRootCode(String rootCode) {
+		this.rootCode = rootCode;
+	}
+
+	public Tree getTree() {
+		return tree;
+	}
+
+	public void setTree(Tree tree) {
+		this.tree = tree;
 	}
 
 }

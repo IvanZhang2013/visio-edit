@@ -5,13 +5,7 @@ import java.util.List;
 
 public class TestNode  extends AbstractNode{
 
-	@Override
-	public String createText(Object object) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	
 	public static List<AbstractNode> create(){
 		TestNode  testNode  = new TestNode();
 		testNode.setId("0");
@@ -35,5 +29,12 @@ public class TestNode  extends AbstractNode{
 		list.add(testNode3);
 		list.add(testNode4);
 		return list;
+	}
+
+
+	@Override
+	public String createText() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

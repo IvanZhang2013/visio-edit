@@ -8,6 +8,7 @@ import org.belle.topit.visio.base.IVMaster;
 import org.belle.topit.visio.base.IVMasters;
 import org.belle.topit.visio.base.IVPage;
 import org.belle.topit.visio.base.IVShape;
+import org.belle.topit.visio.plugin.orgmodel.DocumentConfig;
 import org.slf4j.LoggerFactory;
 
 public class JVisio {
@@ -18,6 +19,16 @@ public class JVisio {
 	 * Visio 程序
 	 */
 	IVApplication visioApp = null;
+
+	private DocumentConfig documentConfig;
+
+	public DocumentConfig getDocumentConfig() {
+		return documentConfig;
+	}
+
+	public void setDocumentConfig(DocumentConfig documentConfig) {
+		this.documentConfig = documentConfig;
+	}
 
 	/**
 	 * 默认visio可见
@@ -72,7 +83,7 @@ public class JVisio {
 	public short saveAs(IVDocument document, String distFile) {
 		IVPage tpage = document.pages().item(new Integer(1));
 		tpage.autoSizeDrawing();
-		return document.saveAs("Y:\\work.vsd");
+		return document.saveAs(documentConfig.getxPatch());
 	}
 
 	/**
@@ -85,7 +96,8 @@ public class JVisio {
 	 * @return
 	 */
 	public IVMaster getMaster(IVDocument document, String masterNameUIDOrIndex) {
-		IVMasters masters = document.pages().item(new Integer(1)).document().masters();
+		IVMasters masters = document.pages().item(new Integer(1)).document()
+				.masters();
 		IVMaster master = masters.item(masterNameUIDOrIndex);
 		log.info("Get the master :" + (master == null ? null : master.name()));
 		return master;

@@ -34,7 +34,6 @@ public class TestNode  extends AbstractNode{
 
 	@Override
 	public String createText() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return "测试数据";
 	}
 }

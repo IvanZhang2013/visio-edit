@@ -1,10 +1,12 @@
 package org.belle.topit.visio.plugin.orgmodel;
 
-public  class DocumentConfig {
+import java.util.List;
+
+public class DocumentConfig {
 
 	protected String xPatch;
 
-	protected Tree tree;
+	List<? extends AbstractNode> listNode;
 
 	protected String rootCode;
 
@@ -24,12 +26,12 @@ public  class DocumentConfig {
 		this.rootCode = rootCode;
 	}
 
-	public Tree getTree() {
-		return tree;
+	public List<? extends AbstractNode> getListNode() {
+		return listNode;
 	}
 
-	public void setTree(Tree tree) {
-		this.tree = tree;
+	public void setListNode(List<? extends AbstractNode> listNode) {
+		this.listNode = listNode;
 	}
 
 }

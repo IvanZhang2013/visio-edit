@@ -13,20 +13,18 @@ import org.belle.topit.visio.base.IVPage;
 import org.belle.topit.visio.base.IVShape;
 import org.belle.topit.visio.plugin.orgmodel.AbstractNode;
 import org.belle.topit.visio.plugin.orgmodel.DocumentConfig;
-import org.belle.topit.visio.plugin.orgmodel.Tree;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class VISIOApplication {
 
-	private static Logger logger = LoggerFactory
-			.getLogger(VISIOApplication.class);
+	private static Logger logger = LoggerFactory.getLogger(VISIOApplication.class);
 	// 窗口是否显示 默认查窗口不显示
 	private final static boolean WINDOWNO_VISIBLE = false;
 	// 使用的模型
-	private final static String MODEL_VSS = "..//model/BASIC_M.VSS";
+	private final static String MODEL_VSS = "D:/model/BASIC_M.VSS";
 	// 使用的窗口模版
-	private final static String MODEL_VST = "..//model/BASICD_M.VSS";
+	private final static String MODEL_VST = "D:/model/BASICD_M.VST";
 
 	// 应用程序
 	IVApplication visioApp = null;
@@ -49,9 +47,7 @@ public class VISIOApplication {
 			e.printStackTrace();
 			logger.error("创建visio程序应用失败！");
 			throw new Exception(e);
-		} finally {
-			this.quit();
-		}
+		} 
 
 	}
 
@@ -66,9 +62,7 @@ public class VISIOApplication {
 			e.printStackTrace();
 			logger.error("创建visio程序应用失败！");
 			throw new Exception(e);
-		} finally {
-			this.quit();
-		}
+		} 
 
 	}
 
@@ -83,29 +77,27 @@ public class VISIOApplication {
 			e.printStackTrace();
 			logger.error("创建visio程序应用失败！");
 			throw new Exception(e);
-		} finally {
-			this.quit();
-		}
+		} 
 
 	}
 
-	public short saveAs(String distFile) {
+	public short saveAs(DocumentConfig documentConfig) {
 		IVPage tpage = this.template.pages().item(new Integer(1));
 		tpage.autoSizeDrawing();
-		return this.template.saveAs(distFile);
+		return this.template.saveAs(documentConfig.getxPatch());
 	}
 
 	public void quit() {
 		this.visioApp.quit();
 	}
 
-	public void creatRoot(DocumentConfig documentConfig,
-			List<? extends AbstractNode> listNode) throws Exception {
-		Tree tree = new Tree();
+	public void creatRoot(DocumentConfig documentConfig) throws Exception {
+		List<? extends AbstractNode> listNode = documentConfig.getListNode();
 		for (int i = 0; i < listNode.size(); i++) {
 			AbstractNode node = listNode.get(i);
 			if (node.getFatherId().equals(documentConfig.getRootCode())) {
 				listNode.remove(node);
+				i=i-1;
 				String docText = node.createText();
 				// 画上级节点
 				IVMaster farthorNode = this.getMaster(this.model, "矩形");
@@ -137,16 +129,16 @@ public class VISIOApplication {
 
 		for (int j = 0; j < listNode.size(); j++) {
 			element = listNode.get(j);
-			// 画节点
-			IVMaster farthorNode = this.getMaster(this.model, "矩形");
-			IVShape farthorShape = this.drop(this.template, farthorNode, 2, 3,
-					true, element.createText());
 			if (node.getId().equals(element.getFatherId())) {
 				sonShapeList = creatNode(element, listNode);
+				// 画节点
+				IVMaster farthorNode = this.getMaster(this.model, "矩形");
+				IVShape farthorShape = this.drop(this.template, farthorNode, 2, 3,
+						true, element.createText());
 				listNode.remove(element);
 				j = j - 1;
-				for (int i = 0; i < sonShapeList.size(); j++) {
-					IVShape sonShape = sonShapeList.get(j);
+				for (int i = 0; i < sonShapeList.size(); i++) {
+					IVShape sonShape = sonShapeList.get(i);
 					// 画动态连接线
 					IVMaster line = this.getMaster(model, "动态连接线");
 					IVShape lineShape = this.drop(template, line, 1, 1, false,null);
